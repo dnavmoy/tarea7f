@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.function.BiConsumer;
+
 import java.util.stream.Collectors;
 
 /**
@@ -28,9 +28,6 @@ public class Tarea7fDanielNavarro {
     public static void main(String[] args) {
         List<Personas> lista = Fichero.extraerDatosPersonaPorLinea(Fichero.leerFichero("personas.csv"));
 
-        //for (Personas p : lista){
-        //    System.out.println(p);
-        //}
         Set<String> setGenero = conjuntoPersonas(lista);
 
         for (String p : setGenero) {
@@ -47,7 +44,7 @@ public class Tarea7fDanielNavarro {
         //Obtener una lista de personas nacidas en 1985, ordenadas por su email.
         List<Personas> lista1985 = new ArrayList<>();
         for (Personas p : lista) {
-
+            
             if (p.fecha().isAfter(LocalDate.of(1985, 01, 01)) && p.fecha().isBefore(LocalDate.of(1985, 12, 31))) {
                 lista1985.add(p);
             }
@@ -73,7 +70,7 @@ public class Tarea7fDanielNavarro {
         TreeSet<String> setEmail = new TreeSet<>();
 
         for (Personas p : lista) {
-            if (p.genero().equalsIgnoreCase("Non-binary")) {
+            if (p.genero().equalsIgnoreCase("Non-binary")&&p.jubilado()) {
                 setEmail.add(p.email());
             }
 
@@ -85,6 +82,7 @@ public class Tarea7fDanielNavarro {
         TreeSet<String> setEmailStream = new TreeSet<>();
         lista.stream()
                 .filter(p -> p.genero().equalsIgnoreCase("Non-binary"))
+                .filter(p-> p.jubilado())
                 .forEach(p -> setEmailStream.add(p.email()));
 
         System.out.println("\nmostrar lista de emails ordenados con STream");
@@ -105,7 +103,7 @@ public class Tarea7fDanielNavarro {
         //Stream
         System.out.println(" ciudades: "
                 + lista.stream()
-                        .sorted((p1, p2) -> p1.ciudad().compareToIgnoreCase(p2.ciudad()))
+                        //.sorted((p1, p2) -> p1.ciudad().compareToIgnoreCase(p2.ciudad()))
                         .map(p -> p.ciudad())
                         .distinct()
                         .count()
@@ -115,7 +113,7 @@ public class Tarea7fDanielNavarro {
         boolean zondra = false;
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).nombre().equalsIgnoreCase("Zondra")) {
-                zondra = true;
+                zondra = true;                
             }
 
         }
@@ -192,8 +190,7 @@ public class Tarea7fDanielNavarro {
         }
         System.out.println("total edad :" + contadorEdad);
        
-                        
-        
+                                
     
         //Stream
         contadorEdad=listaEdades.values().stream()
@@ -203,10 +200,14 @@ public class Tarea7fDanielNavarro {
                 
                 
         //Obtener la media de edad de las personas de la lista.
+
+
         
         System.out.println("media de edad: " + lista.size()/contadorEdad);
         
         //¿¿con stream?
+        
+        
         
         //Obtener en un String todos los nombres de las personas concatenados.
         

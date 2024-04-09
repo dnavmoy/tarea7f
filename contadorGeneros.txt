@@ -94,6 +94,7 @@ Genderqueer,10
 Male,237
 Non-binary,11
 Polygender,11
+<<<<<<< Updated upstream
 Agender,14
 Bigender,14
 Female,188
@@ -414,3 +415,5 @@ Genderqueer,10
 Male,237
 Non-binary,11
 Polygender,11
+=======
+>>>>>>> Stashed changes
